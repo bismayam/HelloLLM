@@ -1,4 +1,12 @@
-FROM alpine:3.23
+
+ARG MIGRATE_VERSION=v4.19.1
+ARG ALPINE_VERSION=3.19
+
+FROM migrate/migrate:${MIGRATE_VERSION} AS migrate
+
+ARG ALPINE_VERSION
+
+FROM alpine:${ALPINE_VERSION}
 
 RUN apk add --no-cache curl
 
