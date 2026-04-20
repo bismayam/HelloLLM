@@ -16,7 +16,7 @@
 
   "packageRules": [
     {
-      "description": "Update Alpine base image",
+      "description": "'Chore' Update Alpine base image",
       "matchDatasources": ["docker"],
       "matchPackageNames": ["alpine"],
       "versioning": "docker",
@@ -30,7 +30,7 @@
       "matchDatasources": ["docker"],
       "matchPackageNames": ["alpine"],
       "matchUpdateTypes": ["patch"],
-      "automerge": true,
+      "automerge": false,
       "automergeType": "pr"
     }
   ],
