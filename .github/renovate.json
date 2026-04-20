@@ -1,0 +1,49 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+
+  "extends": [
+    "config:recommended",
+    ":semanticCommits",
+    ":dependencyDashboard"
+  ],
+
+  "enabledManagers": ["dockerfile"],
+
+  "labels": ["dependencies", "docker"],
+
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+
+  "schedule": ["after 10pm every weekday", "before 5am every weekday"],
+
+  "packageRules": [
+    {
+      "description": "Update Alpine base image",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["alpine"],
+      "versioning": "docker",
+      "groupName": "alpine base image",
+      "commitMessageTopic": "alpine base image",
+      "commitMessageExtra": "to {{newVersion}}",
+      "automerge": false
+    },
+    {
+      "description": "Automerge patch updates for Alpine",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["alpine"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true,
+      "automergeType": "pr"
+    }
+  ],
+
+  "dockerfile": {
+    "enabled": true
+  },
+
+  "rangeStrategy": "replace",
+
+  "rebaseWhen": "conflicted",
+
+  "dependencyDashboard": true
+}
