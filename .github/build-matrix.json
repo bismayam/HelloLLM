@@ -28,11 +28,6 @@
         {
             "alpine": "3.22",
             "migrate": "v4.19.1",
-            "tags": "alpine-322"
-        },
-        {
-            "alpine": "3.23",
-            "migrate": "v4.19.1",
             "tags": "latest alpine-upgrade"
         }
     ]
