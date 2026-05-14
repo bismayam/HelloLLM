@@ -1,0 +1,34 @@
+# Build stage: Copy the migrate binary from the official migrate CLI image
+ARG MIGRATE_VERSION=v4.19.1
+ARG ALPINE_VERSION=3.22
+ARG APP_UID=10001
+ARG APP_GID=10001
+
+FROM migrate/migrate:${MIGRATE_VERSION} AS migrate
+
+# Final stage: Use Alpine as the base image
+ARG ALPINE_VERSION
+FROM alpine:${ALPINE_VERSION}
+
+ARG APP_UID
+ARG APP_GID
+
+# Install required dependencies
+RUN apk add --no-cache ca-certificates bash curl c-ares>=1.34.6-r0
+
+# Update certificate store
+RUN update-ca-certificates
+
+# Copy the migrate binary from the build stage
+COPY --from=migrate /migrate /bin/migrate
+
+# Create a fixed non-root runtime identity and the shared writable paths
+RUN addgroup -S -g ${APP_GID} app \
+	&& adduser -S -D -u ${APP_UID} -G app -h /app app \
+	&& mkdir -p /app \
+	&& chown -R ${APP_UID}:${APP_GID} /app
+
+# Switch to the non-root user
+USER app
+
+STOPSIGNAL SIGINT
