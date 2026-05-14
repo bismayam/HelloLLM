@@ -1,0 +1,39 @@
+{
+    "include": [
+        {
+            "alpine": "3.16",
+            "migrate": "v4.15.1",
+            "tags": "alpine-316"
+        },
+        {
+            "alpine": "3.16",
+            "migrate": "latest",
+            "tags": "migrate-latest"
+        },
+        {
+            "alpine": "3.17",
+            "migrate": "latest",
+            "tags": "alpine-317"
+        },
+        {
+            "alpine": "3.20",
+            "migrate": "v4.17.1",
+            "tags": "alpine-320"
+        },
+        {
+            "alpine": "3.21",
+            "migrate": "v4.19.1",
+            "tags": "alpine-321"
+        },
+        {
+            "alpine": "3.22",
+            "migrate": "v4.19.1",
+            "tags": "alpine-322"
+        },
+        {
+            "alpine": "3.23",
+            "migrate": "v4.19.1",
+            "tags": "latest alpine-upgrade"
+        }
+    ]
+}
