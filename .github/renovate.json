@@ -9,7 +9,7 @@
 
   "enabledManagers": [
     "dockerfile",
-    "regex"
+    "custom.regex"
   ],
   "dockerfile": {
     "fileMatch": [
@@ -17,20 +17,6 @@
       "^Dockerfile\\..*$"
     ]
   },
-   "regexManagers": [
-    {
-      "description": "Update Alpine version only for entries with tags=latest alpine-upgrade in build-matrix.json",
-      "fileMatch": [
-        "^\\.github/build-matrix\\.json$"
-      ],
-      "matchStrings": [
-        "\"alpine\":\\s*\"(?<currentValue>[0-9]+\\.[0-9]+)\"[^}]*?\"tags\":\\s*\"latest alpine-upgrade\""
-      ],
-      "datasourceTemplate": "docker",
-      "depNameTemplate": "alpine",
-      "versioningTemplate": "docker"
-    }
-  ],
   "labels": ["dependencies", "docker"],
 
   "prConcurrentLimit": 10,
@@ -60,6 +46,17 @@
   "dockerfile": {
     "enabled": true
   },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Update Alpine version only for entries with tags=latest alpine-upgrade in build-matrix.json",
+      "managerFilePatterns": ["/^\\.github/build-matrix\\.json$/"],
+      "matchStrings": ["\"alpine\":\\s*\"(?<currentValue>[0-9]+\\.[0-9]+)\"[^}]*?\"tags\":\\s*\"latest alpine-upgrade\""],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "alpine",
+      "versioningTemplate": "docker"
+    }
+  ],
 
   "rangeStrategy": "replace",
 
