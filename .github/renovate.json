@@ -7,8 +7,30 @@
     ":dependencyDashboard"
   ],
 
-  "enabledManagers": ["dockerfile"],
-
+  "enabledManagers": [
+    "dockerfile",
+    "regex"
+  ],
+  "dockerfile": {
+    "fileMatch": [
+      "^Dockerfile$",
+      "^Dockerfile\\..*$"
+    ]
+  },
+   "regexManagers": [
+    {
+      "description": "Update Alpine version only for entries with tags=latest alpine-upgrade in build-matrix.json",
+      "fileMatch": [
+        "^\\.github/build-matrix\\.json$"
+      ],
+      "matchStrings": [
+        "\"alpine\":\\s*\"(?<currentValue>[0-9]+\\.[0-9]+)\"[\\s\\S]*?\"tags\":\\s*\"latest alpine-upgrade\""
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "alpine",
+      "versioningTemplate": "docker"
+    }
+  ],
   "labels": ["dependencies", "docker"],
 
   "prConcurrentLimit": 5,
