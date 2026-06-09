@@ -1,6 +1,6 @@
 # Build stage: Copy the migrate binary from the official migrate CLI image
 ARG MIGRATE_VERSION=v4.19.1
-ARG ALPINE_VERSION=3.22
+ARG ALPINE_VERSION=3.24
 ARG APP_UID=10001
 ARG APP_GID=10001
 

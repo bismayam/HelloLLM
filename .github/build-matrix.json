@@ -26,7 +26,7 @@
             "tags": "alpine-321"
         },
         {
-            "alpine": "3.22",
+            "alpine": "3.24",
             "migrate": "v4.19.1",
             "tags": "latest alpine-upgrade"
         }
